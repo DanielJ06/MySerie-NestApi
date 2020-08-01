@@ -6,7 +6,7 @@ import { SerieModule } from './modules/serie/serie.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://daniel:daniel06@cluster0-ghdgm.mongodb.net/MySerie?retryWrites=true&w=majority'),
+    MongooseModule.forRoot('mongodb+srv://daniel:daniel06@cluster0-ghdgm.mongodb.net/test?retryWrites=true&w=majority'),
     SerieModule
   ],
 })
