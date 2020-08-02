@@ -1,7 +1,8 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body, UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { SerieService } from './serie.service';
 import { Serie } from './serie.schema';
+import { CreateSerieDto } from './dto/create-serie.dto';
 
 @Controller('serie')
 export class SerieController {
@@ -10,6 +11,12 @@ export class SerieController {
   @Get()
     async getSeries(): Promise<Serie[]> {
       return this.serieService.getAll()
+    }
+
+  @Post()
+  @UsePipes(ValidationPipe)
+    async createSerie(@Body() createSerieDto: CreateSerieDto): Promise<Serie> {
+      return this.serieService.create(createSerieDto);
     }
 }
 
