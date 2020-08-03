@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UsePipes, ValidationPipe, Param, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, UsePipes, ValidationPipe, Param, Put, Delete } from '@nestjs/common';
 
 import { SerieService } from './serie.service';
 import { Serie } from './serie.schema';
@@ -30,11 +30,11 @@ export class SerieController {
       @Body() createSerieDto: CreateSerieDto,
       @Param('id') id: string,
     ): Promise<Serie> {
-      return this.serieService.update(createSerieDto, id)
+      return this.serieService.update(createSerieDto, id);
+    }
+
+  @Delete('/:id')
+    async deleteSerie(@Param('id') id: string): Promise<any> {
+      return this.serieService.delete(id);
     }
 }
-
-// routes.get('/serie', serieController.index)
-// routes.post('/serie', serieController.store)
-// routes.delete('/serie/:id', serieController.delete)
-// routes.put('/serie/:id', serieController.edit)

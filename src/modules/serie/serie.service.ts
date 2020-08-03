@@ -28,4 +28,8 @@ export class SerieService {
     await this.serieModel.updateOne({ _id: id }, createSerieDto).exec();
     return this.getById(id);
   }
+
+  async delete( id: string ): Promise<any> {
+    return await this.serieModel.deleteOne({ _id: id }).exec();
+  }
 }
