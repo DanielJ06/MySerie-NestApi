@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, UsePipes, ValidationPipe, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, UsePipes, ValidationPipe, Param, Put } from '@nestjs/common';
 
 import { SerieService } from './serie.service';
 import { Serie } from './serie.schema';
@@ -14,7 +14,7 @@ export class SerieController {
     }
 
   @Get('/:id')
-    async getSerieById(@Param('id') id: number): Promise<Serie> {
+    async getSerieById(@Param('id') id: string): Promise<Serie> {
       return this.serieService.getById(id);
     }
 
@@ -22,6 +22,15 @@ export class SerieController {
   @UsePipes(ValidationPipe)
     async createSerie(@Body() createSerieDto: CreateSerieDto): Promise<Serie> {
       return this.serieService.create(createSerieDto);
+    }
+
+  @Put('/:id')
+  @UsePipes(ValidationPipe)
+    async updateSerie(
+      @Body() createSerieDto: CreateSerieDto,
+      @Param('id') id: string,
+    ): Promise<Serie> {
+      return this.serieService.update(createSerieDto, id)
     }
 }
 

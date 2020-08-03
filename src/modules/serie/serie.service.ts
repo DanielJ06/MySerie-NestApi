@@ -14,7 +14,7 @@ export class SerieService {
     return await this.serieModel.find().exec();
   }
 
-  async getById(id: number): Promise<Serie> {
+  async getById(id: string): Promise<Serie> {
     return await this.serieModel.findOne({ _id: id }).exec();
   }
 
@@ -22,5 +22,10 @@ export class SerieService {
     const serie = new this.serieModel(createSerieDto);
     serie.save();
     return serie;
+  }
+
+  async update(createSerieDto: CreateSerieDto, id: string): Promise<Serie> {
+    await this.serieModel.updateOne({ _id: id }, createSerieDto).exec();
+    return this.getById(id);
   }
 }
