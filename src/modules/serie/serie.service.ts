@@ -14,6 +14,10 @@ export class SerieService {
     return await this.serieModel.find().exec();
   }
 
+  async getById(id: number): Promise<Serie> {
+    return await this.serieModel.findOne({ _id: id }).exec();
+  }
+
   async create(createSerieDto: CreateSerieDto): Promise<Serie> {
     const serie = new this.serieModel(createSerieDto);
     serie.save();
